@@ -1,6 +1,5 @@
 package com.example.dailyexpense.ui.screens.expensesList
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -20,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.dailyexpense.data.Category
+import com.example.dailyexpense.model.Category
 import com.example.dailyexpense.viewmodel.AppViewModelFactory
 import com.example.dailyexpense.viewmodel.ExpenseViewModel
 import com.example.dailyexpense.viewmodel.CategoryViewModel
@@ -28,8 +27,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import com.example.dailyexpense.utils.IconWithColor
 import com.example.dailyexpenses.R
+import com.example.dailyexpense.ui.theme.GreenGray40
+import com.example.dailyexpense.ui.theme.Purple40
+import com.example.dailyexpense.model.Expense
+
+/**
+ * Pantalla principal para listar los gastos registrados.
+ * Muestra una lista de gastos utilizando LazyColumn y escucha los datos desde ExpenseViewModel.
+ * Cada gasto se representa mediante un Card estilizado.
+ */
 
 @Composable
 fun ExpensesListScreen(
@@ -45,8 +52,13 @@ fun ExpensesListScreen(
     val categories by categoryViewModel.categories.collectAsState(initial = emptyList())
 
     val backgroundGradient = Brush.radialGradient(
-        colors = listOf(Color(0xFF56645C), Color(0xFF1F1C2C))
+        colors = listOf(GreenGray40, Purple40)
     )
+
+    var showDialog by remember { mutableStateOf(false) }
+    var selectedExpense by remember { mutableStateOf<Expense?>(null) }
+
+
 
     Column(
         modifier = Modifier
@@ -81,7 +93,7 @@ fun ExpensesListScreen(
                             .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Icono dentro de círculo de color
+
                         Box(
                             modifier = Modifier
                                 .size(50.dp)
@@ -128,10 +140,49 @@ fun ExpensesListScreen(
                                 fontSize = 22.sp
                             )
                         }
+
+                        IconButton(
+                            onClick = {
+                                selectedExpense = expense
+                                showDialog = true
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = stringResource(id = R.string.delete),
+                                tint = Color.Red
+                            )
+                        }
                     }
                 }
             }
         }
+
+        if (showDialog && selectedExpense != null) {
+            AlertDialog(
+                onDismissRequest = { showDialog = false },
+                title = { Text(stringResource(id = R.string.delete)) },
+                text = { Text("¿Estás seguro que deseas eliminar \"${selectedExpense?.name}\"?") },
+                confirmButton = {
+                    TextButton(onClick = {
+                        selectedExpense?.let { expenseViewModel.deleteExpense(it) }
+                        showDialog = false
+                    }) {
+                        Text("Sí")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDialog = false }) {
+                        Text("Cancelar")
+                    }
+                },
+                containerColor = Color(0xFF2E2B5B),
+                titleContentColor = Color.White,
+                textContentColor = Color.LightGray
+            )
+        }
+
+
 
     }
 }

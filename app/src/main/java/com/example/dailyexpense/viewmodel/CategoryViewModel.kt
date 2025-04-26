@@ -3,12 +3,14 @@ package com.example.dailyexpense.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.dailyexpense.data.Category
+import com.example.dailyexpense.model.Category
 import com.example.dailyexpense.repository.CategoryRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de manejar las operaciones relacionadas con las categorías (Categories).
+ * Permite insertar nuevas categorías y consultar las existentes.
+ */
 class CategoryViewModel(private val repository: CategoryRepository) : ViewModel() {
 
     val categories = repository.categories

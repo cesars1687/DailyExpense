@@ -26,9 +26,16 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.graphics.toColorInt
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.res.stringResource
+import com.example.dailyexpense.ui.theme.ContainerColor
 import com.github.mikephil.charting.components.Legend
 import com.example.dailyexpenses.R
 
+/**
+ * Pantalla de resumen que muestra:
+ * - Un Card con el gasto total acumulado.
+ * - Un gráfico PieChart con los gastos agrupados por categoría.
+ * Los datos se obtienen del ExpenseViewModel.
+ */
 @Composable
 fun SummaryScreen(
     navController: NavHostController,
@@ -38,17 +45,18 @@ fun SummaryScreen(
     val viewModel: ExpenseViewModel = viewModel(
         factory = AppViewModelFactory.provideExpenseViewModelFactory(context)
     )
-    val expenses by expenseViewModel.expenses.collectAsState(initial = emptyList())
-
+    //val expenses by expenseViewModel.expenses.collectAsState(initial = emptyList())
+    val expensesState = expenseViewModel.expenses.collectAsState()
+    val expenses = expensesState.value
     val totalAmount = expenses.sumOf { it.amount }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0D0C1F))
+            .background(ContainerColor)
             .padding(16.dp)
     ) {
-        // 🟣 CARD DE GASTO TOTAL
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()

@@ -17,4 +17,6 @@
     <string name="total_expense">Total Expense</string>
     <string name="expenses_by_category">Expenses by Category</string>
     <string name="expenses_summary">Expenses Summary</string>
+    <string name="delete">Delete</string>
+    <string name="delete_expense">Delete Expense?</string>
 </resources>

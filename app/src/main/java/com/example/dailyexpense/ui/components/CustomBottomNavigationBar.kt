@@ -1,33 +1,28 @@
 // CustomBottomNavigationBar.kt
 package com.example.dailyexpense.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Checklist
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.dailyexpense.navigation.Screen
 import androidx.navigation.compose.currentBackStackEntryAsState
 
-
+/**
+ * Composable que representa la barra de navegación inferior personalizada.
+ * Permite la navegación entre Summary, Expenses, AddExpense y AddCategory.
+ */
 @Composable
 fun CustomBottomNavigationBar(
     navController: NavController,

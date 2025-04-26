@@ -1,10 +1,13 @@
 package com.example.dailyexpense.repository
 
-import androidx.lifecycle.LiveData
-import com.example.dailyexpense.data.Expense
+import com.example.dailyexpense.model.Expense
 import com.example.dailyexpense.data.ExpenseDao
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Repositorio que proporciona una abstracción sobre las operaciones de datos de gastos.
+ * Interactúa con ExpenseDao para acceder a la base de datos.
+ */
 class ExpenseRepository(private val expenseDao: ExpenseDao) {
 
     suspend fun insertExpense(expense: Expense) {

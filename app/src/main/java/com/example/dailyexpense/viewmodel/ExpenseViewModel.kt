@@ -3,12 +3,16 @@ package com.example.dailyexpense.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.dailyexpense.data.Expense
+import com.example.dailyexpense.model.Expense
 import com.example.dailyexpense.repository.ExpenseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar las operaciones de los gastos (expenses).
+ * Maneja la inserción, eliminación y consulta de gastos usando Room y Flow.
+ */
 class ExpenseViewModel(private val repository: ExpenseRepository) : ViewModel() {
 
     private val _expenses = MutableStateFlow<List<Expense>>(emptyList())

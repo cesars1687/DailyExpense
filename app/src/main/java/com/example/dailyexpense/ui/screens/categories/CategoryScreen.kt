@@ -28,8 +28,17 @@ import com.example.dailyexpense.viewmodel.CategoryViewModel
 import com.example.dailyexpense.viewmodel.CategoryViewModelFactory
 import com.example.dailyexpense.viewmodel.ExpenseViewModel
 import androidx.compose.ui.res.stringResource
+import com.example.dailyexpense.ui.theme.ContainerColor
+import com.example.dailyexpense.ui.theme.Fuchsia
 import com.example.dailyexpenses.R
+import com.example.dailyexpense.ui.theme.GreenGray40
+import com.example.dailyexpense.ui.theme.Purple40
 
+/**
+ * Pantalla para agregar nuevas categorías de gasto.
+ * Permite asignar un nombre y un icono a cada categoría.
+ * También muestra una lista de las categorías ya registradas.
+ */
 @Composable
 fun CategoryScreen(
     navController: NavHostController,
@@ -65,10 +74,10 @@ fun CategoryScreen(
         }
     }
     val backgroundGradient = Brush.radialGradient(
-        colors = listOf(Color(0xFF56645C), Color(0xFF1F1C2C))
+        colors = listOf(GreenGray40, Purple40)
     )
     Scaffold(
-        containerColor = Color(0xFF0D0C1F),
+        containerColor = Purple40,
         modifier = Modifier
             .fillMaxSize()
             .background(brush = backgroundGradient),
@@ -81,7 +90,7 @@ fun CategoryScreen(
                 .background(brush = backgroundGradient)
         ) {
             Text(
-                text = "Add Category",
+                text = stringResource(id = R.string.add_category),
                 style = MaterialTheme.typography.titleLarge,
                 color = Color.White
             )
@@ -134,7 +143,9 @@ fun CategoryScreen(
                         showSnackbar.value = true
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(28.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Fuchsia)
             ) {
                 Text(stringResource(id = R.string.save_category))
             }

@@ -3,7 +3,6 @@ package com.example.dailyexpense.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.dailyexpense.ui.screens.addExpense.AddExpenseScreen
 import com.example.dailyexpense.ui.screens.expensesList.ExpensesListScreen
 import com.example.dailyexpense.ui.screens.summary.SummaryScreen
@@ -13,6 +12,10 @@ import com.example.dailyexpense.ui.screens.categories.CategoryScreen
 import com.example.dailyexpense.viewmodel.CategoryViewModel
 import com.example.dailyexpense.viewmodel.ExpenseViewModel
 
+/**
+ * Composable que define la navegación de la aplicación.
+ * Establece el NavHost y las rutas disponibles entre pantallas.
+ */
 @Composable
 fun AppNavigation(navController: NavHostController, expenseViewModel: ExpenseViewModel,  categoryViewModel: CategoryViewModel, modifier: Modifier = Modifier) {
     NavHost(

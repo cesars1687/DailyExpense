@@ -6,7 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.dailyexpense.data.Expense
+import com.example.dailyexpense.model.Expense
 import com.example.dailyexpense.viewmodel.ExpenseViewModel
 import java.text.SimpleDateFormat
 import androidx.compose.foundation.clickable
@@ -24,7 +24,15 @@ import java.util.*
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import com.example.dailyexpenses.R
+import com.example.dailyexpense.ui.theme.GreenGray40
+import com.example.dailyexpense.ui.theme.Purple40
+import com.example.dailyexpense.ui.theme.Fuchsia
 
+/**
+ * Pantalla para agregar un nuevo gasto.
+ * Permite ingresar nombre, monto, seleccionar categoría y fecha.
+ * Guarda el gasto usando ExpenseViewModel.
+ */
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun AddExpenseScreen(
@@ -41,7 +49,7 @@ fun AddExpenseScreen(
 
     val currentDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
     val backgroundGradient = Brush.radialGradient(
-        colors = listOf(Color(0xFF56645C), Color(0xFF1F1C2C))
+        colors = listOf(GreenGray40, Purple40)
     )
     Column(
         modifier = Modifier
@@ -95,7 +103,7 @@ fun AddExpenseScreen(
                 .fillMaxWidth()
                 .height(56.dp),
             shape = RoundedCornerShape(28.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9C27B0))
+            colors = ButtonDefaults.buttonColors(containerColor = Fuchsia)
         ) {
             Text(stringResource(id = R.string.save_expense), color = Color.White, fontSize = 18.sp)
         }
